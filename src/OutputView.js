@@ -27,6 +27,10 @@ const OutputView = {
     MissionUtils.Console.print("\n초기화 되었습니다.\n");
   },
 
+  printNotExistPair() {
+    MissionUtils.Console.print("\n입력하신 미션의 페어링 매칭 결과가 존재하지 않습니다\n");
+  },
+
   printErrorMessage(error) {
     MissionUtils.Console.print(error.message);
   },
