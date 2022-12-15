@@ -14,6 +14,12 @@ const Validator = {
       throw new Error("[ERROR] 올바른 미션 정보를 입력해주세요.");
     }
   },
+
+  validateRematchingCommand(command) {
+    if (command !== "네" && command !== "아니오") {
+      throw new Error("[ERROR] 네 혹은 아니오 중에 하나를 입력해야 합니다.");
+    }
+  },
 };
 
 module.exports = Validator;
