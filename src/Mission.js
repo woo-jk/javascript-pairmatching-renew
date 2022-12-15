@@ -1,5 +1,3 @@
-const FileHandler = require("./FileHandler");
-
 class Mission {
   #name;
   #level;
@@ -12,6 +10,11 @@ class Mission {
 
   isCorrectMission(level, name) {
     return level === this.#level && name === this.#name;
+  }
+
+  isExistPair(course) {
+    if (course === "프론트엔드") return this.#pair.frontEnd.length > 0;
+    if (course === "백엔드") return this.#pair.backEnd.length > 0;
   }
 
   makePair(course, shuffleCrew) {
