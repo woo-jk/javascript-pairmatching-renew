@@ -1,7 +1,9 @@
+const FileHandler = require("./FileHandler");
+
 class Mission {
   #name;
   #level;
-  #fair = { frontEnd, backEnd };
+  #fair = { frontEnd: [], backEnd: [] };
 
   constructor(name, level) {
     this.#name = name;
@@ -17,7 +19,9 @@ class Mission {
     if (course === "백엔드") this.makeBackEndFair();
   }
 
-  makeFrontEndFair() {}
+  makeFrontEndFair() {
+    console.log(FileHandler.getFrontEndCrew());
+  }
 
   makeBackEndFair() {}
 }
