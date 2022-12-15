@@ -22,6 +22,11 @@ class Mission {
     if (course === "백엔드") this.#makeBackEndPair(shuffleCrew);
   }
 
+  removePair() {
+    this.#pair.frontEnd = [];
+    this.#pair.backEnd = [];
+  }
+
   #makeFrontEndPair(shuffleCrew) {
     this.#pair.frontEnd = [];
     for (let i = 0; i < shuffleCrew.length; i += 2) {

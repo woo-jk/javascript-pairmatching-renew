@@ -52,6 +52,10 @@ class MissionBoard {
     const shuffleCrew = this.#getShuffleCrew(course);
     mission.makePair(course, shuffleCrew);
   }
+
+  resetPair() {
+    this.#missions.forEach((mission) => mission.resetPair());
+  }
 }
 
 module.exports = MissionBoard;
