@@ -23,6 +23,7 @@ class Mission {
   }
 
   #makeFrontEndPair(shuffleCrew) {
+    this.#pair.frontEnd = [];
     for (let i = 0; i < shuffleCrew.length; i += 2) {
       if (i === shuffleCrew.length - 1) {
         this.#pair.frontEnd[this.#pair.frontEnd.length - 1].push(shuffleCrew[1]);
@@ -34,6 +35,7 @@ class Mission {
   }
 
   #makeBackEndPair(shuffleCrew) {
+    this.#pair.backEnd = [];
     for (let i = 0; i < shuffleCrew.length; i += 2) {
       if (i === shuffleCrew.length - 1) {
         this.#pair.backEnd[this.#pair.backEnd.length - 1].push(shuffleCrew[1]);

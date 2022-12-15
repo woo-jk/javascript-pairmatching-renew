@@ -30,11 +30,27 @@ class App {
     InputView.readMissionSelection((input) => {
       this.handleError(() => {
         Validator.validateMissionInput(input);
-        const pairList = this.#missionBoard.makePair(input);
-        OutputView.printPairMatchingList(pairList);
-        this.requestFeatureCommand();
+        const { mission, course, isPairExist } = this.#missionBoard.getMission(input);
+        if (isPairExist) this.requestRematchingCommand(mission, course);
+        else this.pairMatching(mission, course);
       }, this.requestMissionSelection.bind(this));
     });
+  }
+
+  requestRematchingCommand(mission, course) {
+    InputView.readRematchingCommand((command) => {
+      this.handleError(() => {
+        Validator.validateRematchingCommand(command);
+        if (command === "네") this.pairMatching(mission, course);
+        if (command === "아니오") this.requestMissionSelection();
+      }, this.requestRematchingCommand.bind(this));
+    });
+  }
+
+  pairMatching(mission, course) {
+    const pairList = this.#missionBoard.makePair(mission, course);
+    OutputView.printPairMatchingList(pairList);
+    this.requestFeatureCommand();
   }
 
   handleError(callback, request) {

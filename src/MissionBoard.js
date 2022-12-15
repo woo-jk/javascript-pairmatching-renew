@@ -41,10 +41,10 @@ class MissionBoard {
     const [course, level, missionName] = this.#getMissionInfo(input);
     const selectedMission = this.#getMission(level, missionName);
 
-    return { mission: selectedMission, isPairExist: selectedMission.isExistPair(course) };
+    return { mission: selectedMission, course: course, isPairExist: selectedMission.isPairExist(course) };
   }
 
-  makePair(mission) {
+  makePair(mission, course) {
     const shuffleCrew = this.#getShuffleCrew(course);
     mission.makePair(course, shuffleCrew);
 
