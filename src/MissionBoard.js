@@ -12,6 +12,16 @@ class MissionBoard {
       level5: new Level([]),
     };
   }
+
+  #getLevelNumber(levelText) {
+    return levelText[levelText.length - 1];
+  }
+
+  makeFair(input) {
+    const [course, level, missionName] = input.split(", ");
+    const levelNumber = this.#getLevelNumber(level);
+    this.#missions[`level${levelNumber}`].makeFair(course, missionName);
+  }
 }
 
 module.exports = MissionBoard;

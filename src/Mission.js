@@ -11,9 +11,14 @@ class Mission {
     return name === this.#name;
   }
 
-  matchFrontEndFair() {}
+  makeFair(course) {
+    if (course === "프론트엔드") this.makeFrontEndFair();
+    if (course === "백엔드") this.makeBackEndFair();
+  }
 
-  matchBackEndFair() {}
+  makeFrontEndFair() {}
+
+  makeBackEndFair() {}
 }
 
 module.exports = Mission;
