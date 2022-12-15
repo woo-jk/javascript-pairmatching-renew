@@ -20,11 +20,25 @@ class Mission {
   }
 
   #makeFrontEndFair(shuffleCrew) {
-    this.#fair.frontEnd = shuffleCrew;
+    for (let i = 0; i < shuffleCrew.length; i += 2) {
+      if (i === shuffleCrew.length - 1) {
+        this.#fair.frontEnd[this.#fair.frontEnd.length - 1].push(shuffleCrew[1]);
+        return;
+      }
+      const fair = shuffleCrew.slice(i, i + 2);
+      this.#fair.frontEnd.push(fair);
+    }
   }
 
   #makeBackEndFair(shuffleCrew) {
-    this.#fair.backEnd = shuffleCrew;
+    for (let i = 0; i < shuffleCrew.length; i += 2) {
+      if (i === shuffleCrew.length - 1) {
+        this.#fair.backEnd[this.#fair.backEnd.length - 1].push(shuffleCrew[1]);
+        return;
+      }
+      const fair = shuffleCrew.slice(i, i + 2);
+      this.#fair.backEnd.push(fair);
+    }
   }
 }
 
