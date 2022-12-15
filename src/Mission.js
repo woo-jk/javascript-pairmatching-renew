@@ -1,14 +1,15 @@
 class Mission {
   #name;
-  #frontEndFair;
-  #BackEndFair;
+  #level;
+  #fair = { frontEnd, backEnd };
 
-  constructor(name) {
+  constructor(name, level) {
     this.#name = name;
+    this.#level = level;
   }
 
-  isCorrectName(name) {
-    return name === this.#name;
+  isCorrectMission(level, name) {
+    return level === this.#level && name === this.#name;
   }
 
   makeFair(course) {

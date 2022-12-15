@@ -2,12 +2,13 @@ const MissionBoard = require("./MissionBoard");
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validator = require("./Validator");
+const MissionList = require("./MissionList");
 
 class App {
   #missionBoard;
 
   play() {
-    this.#missionBoard = new MissionBoard();
+    this.#missionBoard = new MissionBoard(MissionList);
   }
 
   requestFeatureCommand() {
