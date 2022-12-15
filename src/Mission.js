@@ -3,7 +3,7 @@ const FileHandler = require("./FileHandler");
 class Mission {
   #name;
   #level;
-  #fair = { frontEnd: [], backEnd: [] };
+  #pair = { frontEnd: [], backEnd: [] };
 
   constructor(name, level) {
     this.#name = name;
@@ -14,37 +14,37 @@ class Mission {
     return level === this.#level && name === this.#name;
   }
 
-  makeFair(course, shuffleCrew) {
-    if (course === "프론트엔드") this.#makeFrontEndFair(shuffleCrew);
-    if (course === "백엔드") this.#makeBackEndFair(shuffleCrew);
+  makePair(course, shuffleCrew) {
+    if (course === "프론트엔드") this.#makeFrontEndPair(shuffleCrew);
+    if (course === "백엔드") this.#makeBackEndPair(shuffleCrew);
   }
 
-  #makeFrontEndFair(shuffleCrew) {
+  #makeFrontEndPair(shuffleCrew) {
     for (let i = 0; i < shuffleCrew.length; i += 2) {
       if (i === shuffleCrew.length - 1) {
-        this.#fair.frontEnd[this.#fair.frontEnd.length - 1].push(shuffleCrew[1]);
+        this.#pair.frontEnd[this.#pair.frontEnd.length - 1].push(shuffleCrew[1]);
         return;
       }
-      const fair = shuffleCrew.slice(i, i + 2);
-      this.#fair.frontEnd.push(fair);
+      const pair = shuffleCrew.slice(i, i + 2);
+      this.#pair.frontEnd.push(pair);
     }
   }
 
-  #makeBackEndFair(shuffleCrew) {
+  #makeBackEndPair(shuffleCrew) {
     for (let i = 0; i < shuffleCrew.length; i += 2) {
       if (i === shuffleCrew.length - 1) {
-        this.#fair.backEnd[this.#fair.backEnd.length - 1].push(shuffleCrew[1]);
+        this.#pair.backEnd[this.#pair.backEnd.length - 1].push(shuffleCrew[1]);
         return;
       }
-      const fair = shuffleCrew.slice(i, i + 2);
-      this.#fair.backEnd.push(fair);
+      const pair = shuffleCrew.slice(i, i + 2);
+      this.#pair.backEnd.push(pair);
     }
   }
 
-  getFairTextList(course) {
-    const fairList = course === "프론트엔드" ? this.#fair.frontEnd : this.#fair.backEnd;
+  getPairTextList(course) {
+    const pairList = course === "프론트엔드" ? this.#pair.frontEnd : this.#pair.backEnd;
 
-    return fairList.map((fair) => fair.join(" : "));
+    return pairList.map((pair) => pair.join(" : "));
   }
 }
 

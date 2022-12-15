@@ -16,12 +16,12 @@ class App {
     InputView.readFeatureSelection((command) => {
       this.handleError(() => {
         Validator.validateFeatureCommand(command);
-        if (command === "1") this.fairMatching();
+        if (command === "1") this.pairMatching();
       }, this.requestFeatureCommand.bind(this));
     });
   }
 
-  fairMatching() {
+  pairMatching() {
     OutputView.printMissionOverView();
     this.requestMissionSelection();
   }
@@ -30,7 +30,7 @@ class App {
     InputView.readMissionSelection((input) => {
       this.handleError(() => {
         Validator.validateMissionInput(input);
-        this.#missionBoard.makeFair(input);
+        this.#missionBoard.makePair(input);
       });
     }, this.requestMissionSelection.bind(this));
   }

@@ -20,6 +20,7 @@ const OutputView = {
   printPairMatchingList(pairMatchingList) {
     MissionUtils.Console.print("\n페어 매칭 결과입니다.");
     pairMatchingList.forEach((pair) => MissionUtils.Console.print(pair));
+    MissionUtils.Console.print();
   },
 
   printPairMathchingReset() {
