@@ -37,13 +37,18 @@ class MissionBoard {
     throw new Error("[ERROR] 입력하신 미션은 존재하지 않습니다.");
   }
 
-  makePair(input) {
+  getMission(input) {
     const [course, level, missionName] = this.#getMissionInfo(input);
-    const shuffleCrew = this.#getShuffleCrew(course);
     const selectedMission = this.#getMission(level, missionName);
 
-    selectedMission.makePair(course, shuffleCrew);
-    return selectedMission.getPairTextList(course);
+    return { mission: selectedMission, isPairExist: selectedMission.isExistPair(course) };
+  }
+
+  makePair(mission) {
+    const shuffleCrew = this.#getShuffleCrew(course);
+    mission.makePair(course, shuffleCrew);
+
+    return mission.getPairTextList(course);
   }
 }
 
