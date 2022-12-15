@@ -44,8 +44,8 @@ class App {
     if (!isPairExist) {
       OutputView.printNotExistPair();
       this.requestMissionSelection(true);
+      return;
     }
-
     const pairList = this.#missionBoard.getPairList(mission, course);
     OutputView.printPairMatchingList(pairList);
     this.requestFeatureCommand();
