@@ -13,14 +13,14 @@ const OutputView = {
     "#############################################",
   ],
 
-  printMissionOverView() {
+  printMissionOverview() {
     this.MissionOverView.forEach((text) => MissionUtils.Console.print(text));
   },
 
   printPairMatchingList(pairMatchingList) {
     MissionUtils.Console.print("\n페어 매칭 결과입니다.");
     pairMatchingList.forEach((pair) => MissionUtils.Console.print(pair));
-    MissionUtils.Console.print();
+    MissionUtils.Console.print("");
   },
 
   printPairMathchingReset() {

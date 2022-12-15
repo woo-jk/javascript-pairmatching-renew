@@ -16,13 +16,13 @@ class App {
     InputView.readFeatureSelection((command) => {
       this.handleError(() => {
         Validator.validateFeatureCommand(command);
-        if (command === "1") this.pairMatching();
+        if (command === "1") this.showMissionOverview();
       }, this.requestFeatureCommand.bind(this));
     });
   }
 
-  pairMatching() {
-    OutputView.printMissionOverView();
+  showMissionOverview() {
+    OutputView.printMissionOverview();
     this.requestMissionSelection();
   }
 
@@ -30,7 +30,9 @@ class App {
     InputView.readMissionSelection((input) => {
       this.handleError(() => {
         Validator.validateMissionInput(input);
-        this.#missionBoard.makePair(input);
+        const pairList = this.#missionBoard.makePair(input);
+        OutputView.printPairMatchingList(pairList);
+        this.requestFeatureCommand();
       });
     }, this.requestMissionSelection.bind(this));
   }

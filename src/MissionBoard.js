@@ -43,7 +43,7 @@ class MissionBoard {
     const selectedMission = this.#getMission(level, missionName);
 
     selectedMission.makePair(course, shuffleCrew);
-    return selectedMission.getPairTextList();
+    return selectedMission.getPairTextList(course);
   }
 }
 
