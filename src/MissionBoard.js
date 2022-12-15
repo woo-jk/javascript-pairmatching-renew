@@ -29,16 +29,21 @@ class MissionBoard {
     return shuffleArray(crewList);
   }
 
+  #getMission(level, missionName) {
+    for (let mission of this.#missions) {
+      if (mission.isCorrectMission(level, missionName)) return mission;
+    }
+
+    throw new Error("[ERROR] 입력하신 미션은 존재하지 않습니다.");
+  }
+
   makeFair(input) {
     const [course, level, missionName] = this.#getMissionInfo(input);
     const shuffleCrew = this.#getShuffleCrew(course);
-    for (let mission of this.#missions) {
-      if (mission.isCorrectMission(level, missionName)) {
-        mission.makeFair(course, shuffleCrew);
-        return true;
-      }
-    }
-    return false;
+    const selectedMission = this.#getMission(level, missionName);
+
+    selectedMission.makeFair(course, shuffleCrew);
+    return selectedMission.getFairTextList();
   }
 }
 
