@@ -16,11 +16,13 @@ class MissionBoard {
   makeFair(input) {
     const [course, levelString, missionName] = input.split(", ");
     const levelNumber = this.#getLevelNumber(levelString);
-    this.#missions.forEach((mission) => {
+    for (let mission of this.#missions) {
       if (mission.isCorrectMission(levelNumber, missionName)) {
         mission.makeFair(course);
+        return true;
       }
-    });
+    }
+    return false;
   }
 }
 
