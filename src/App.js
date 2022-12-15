@@ -3,6 +3,7 @@ const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 const Validator = require("./Validator");
 const MissionList = require("./MissionList");
+const { MissionUtils } = require("@woowacourse/mission-utils");
 
 class App {
   #missionBoard;
@@ -18,9 +19,15 @@ class App {
         this.requestFeatureCommand();
         return;
       }
-      if (command === "1") this.showMissionOverview(false);
-      if (command === "2") this.showMissionOverview(true);
+      this.executeFeature(command);
     });
+  }
+
+  executeFeature(command) {
+    if (command === "1") this.showMissionOverview(false);
+    if (command === "2") this.showMissionOverview(true);
+    if (command === "3") this.#missionBoard.resetPair();
+    if (command === "Q") this.end();
   }
 
   showMissionOverview(onlyView) {
@@ -69,6 +76,10 @@ class App {
       if (command === "네") this.pairMatching(mission, course, false);
       if (command === "아니오") this.requestMissionSelection(false);
     });
+  }
+
+  end() {
+    MissionUtils.Console.close();
   }
 
   handleError(validate, input) {

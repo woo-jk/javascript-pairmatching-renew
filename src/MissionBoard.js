@@ -54,7 +54,7 @@ class MissionBoard {
   }
 
   resetPair() {
-    this.#missions.forEach((mission) => mission.resetPair());
+    this.#missions.forEach((mission) => mission.removePair());
   }
 }
 
