@@ -14,16 +14,18 @@ class Mission {
     return level === this.#level && name === this.#name;
   }
 
-  makeFair(course) {
-    if (course === "프론트엔드") this.makeFrontEndFair();
-    if (course === "백엔드") this.makeBackEndFair();
+  makeFair(course, shuffleCrew) {
+    if (course === "프론트엔드") this.#makeFrontEndFair(shuffleCrew);
+    if (course === "백엔드") this.#makeBackEndFair(shuffleCrew);
   }
 
-  makeFrontEndFair() {
-    console.log(FileHandler.getFrontEndCrew());
+  #makeFrontEndFair(shuffleCrew) {
+    this.#fair.frontEnd = shuffleCrew;
   }
 
-  makeBackEndFair() {}
+  #makeBackEndFair(shuffleCrew) {
+    this.#fair.backEnd = shuffleCrew;
+  }
 }
 
 module.exports = Mission;
