@@ -25,6 +25,10 @@ const OutputView = {
   printPairMathchingReset() {
     MissionUtils.Console.print("\n초기화 되었습니다.\n");
   },
+
+  printErrorMessage(error) {
+    MissionUtils.Console.print(error.message);
+  },
 };
 
 module.exports = OutputView;
