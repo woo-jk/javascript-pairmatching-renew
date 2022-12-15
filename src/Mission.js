@@ -40,6 +40,12 @@ class Mission {
       this.#fair.backEnd.push(fair);
     }
   }
+
+  getFairTextList(course) {
+    const fairList = course === "프론트엔드" ? this.#fair.frontEnd : this.#fair.backEnd;
+
+    return fairList.map((fair) => fair.join(" : "));
+  }
 }
 
 module.exports = Mission;
