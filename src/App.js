@@ -9,6 +9,7 @@ class App {
 
   play() {
     this.#missionBoard = new MissionBoard(MissionList);
+    this.requestFeatureCommand();
   }
 
   requestFeatureCommand() {
@@ -33,6 +34,7 @@ class App {
       });
     }, this.requestMissionSelection.bind(this));
   }
+
   handleError(callback, request) {
     try {
       callback();
@@ -42,5 +44,8 @@ class App {
     }
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
