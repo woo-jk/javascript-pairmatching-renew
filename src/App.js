@@ -14,10 +14,12 @@ class App {
 
   requestFeatureCommand() {
     InputView.readFeatureSelection((command) => {
-      this.handleError(() => {
-        Validator.validateFeatureCommand(command);
-        if (command === "1") this.showMissionOverview(false);
-      }, this.requestFeatureCommand.bind(this));
+      if (!this.handleError(Validator.validateFeatureCommand, command)) {
+        this.requestFeatureCommand();
+        return;
+      }
+      if (command === "1") this.showMissionOverview(false);
+      if (command === "2") this.showMissionOverview(true);
     });
   }
 
@@ -28,37 +30,54 @@ class App {
 
   requestMissionSelection(onlyView) {
     InputView.readMissionSelection((input) => {
-      this.handleError(() => {
-        Validator.validateMissionInput(input);
-        const { mission, course, isPairExist } = this.#missionBoard.getMission(input);
-        if (isPairExist) this.requestRematchingCommand(mission, course);
-        else this.pairMatching(mission, course);
-      }, this.requestMissionSelection.bind(this));
+      if (!this.handleError(Validator.validateMissionInput, input)) {
+        this.requestMissionSelection(onlyView);
+        return;
+      }
+      const { mission, course, isPairExist } = this.#missionBoard.getMission(input);
+      if (onlyView) this.showPairList(mission, course, isPairExist);
+      if (!onlyView) this.pairMatching(mission, course, isPairExist);
     });
   }
 
-  requestRematchingCommand(mission, course) {
-    InputView.readRematchingCommand((command) => {
-      this.handleError(() => {
-        Validator.validateRematchingCommand(command);
-        if (command === "네") this.pairMatching(mission, course);
-        if (command === "아니오") this.requestMissionSelection();
-      }, this.requestRematchingCommand.bind(this));
-    });
-  }
+  showPairList(mission, course, isPairExist) {
+    if (!isPairExist) {
+      OutputView.printNotExistPair();
+      this.requestMissionSelection(true);
+    }
 
-  pairMatching(mission, course) {
-    const pairList = this.#missionBoard.makePair(mission, course);
+    const pairList = this.#missionBoard.getPairList(mission, course);
     OutputView.printPairMatchingList(pairList);
     this.requestFeatureCommand();
   }
 
-  handleError(callback, request) {
+  pairMatching(mission, course, isPairExist) {
+    if (isPairExist) {
+      this.requestRematchingCommand(mission, course);
+      return;
+    }
+    this.#missionBoard.makePair(mission, course);
+    this.showPairList(mission, course, true);
+  }
+
+  requestRematchingCommand(mission, course) {
+    InputView.readRematchingCommand((command) => {
+      if (!this.handleError(Validator.validateRematchingCommand, command)) {
+        this.requestRematchingCommand(mission, course);
+        return;
+      }
+      if (command === "네") this.pairMatching(mission, course, false);
+      if (command === "아니오") this.requestMissionSelection(false);
+    });
+  }
+
+  handleError(validate, input) {
     try {
-      callback();
+      validate(input);
+      return true;
     } catch (error) {
       OutputView.printErrorMessage(error);
-      request();
+      return false;
     }
   }
 }
