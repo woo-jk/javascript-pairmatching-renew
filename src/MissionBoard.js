@@ -4,8 +4,8 @@ class MissionBoard {
   #missions = [];
 
   constructor(missionList) {
-    for (let [level, missions] of missionList) {
-      missions.forEach((missionName) => this.#missions.push(new Mission(missionName, level)));
+    for (let [level, missions] of Object.entries(missionList)) {
+      missions.forEach((missionName) => this.#missions.push(new Mission(missionName, Number(level))));
     }
   }
 
@@ -13,11 +13,16 @@ class MissionBoard {
     return Number(levelString[levelString.length - 1]);
   }
 
-  makeFair(input) {
+  #getMissionInfo(input) {
     const [course, levelString, missionName] = input.split(", ");
-    const levelNumber = this.#getLevelNumber(levelString);
+    const level = this.#getLevelNumber(levelString);
+    return [course, level, missionName];
+  }
+
+  makeFair(input) {
+    const [course, level, missionName] = this.#getMissionInfo(input);
     for (let mission of this.#missions) {
-      if (mission.isCorrectMission(levelNumber, missionName)) {
+      if (mission.isCorrectMission(level, missionName)) {
         mission.makeFair(course);
         return true;
       }
