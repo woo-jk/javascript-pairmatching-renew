@@ -21,6 +21,10 @@ const OutputView = {
     MissionUtils.Console.print("\n페어 매칭 결과입니다.");
     pairMatchingList.forEach((pair) => MissionUtils.Console.print(pair));
   },
+
+  printPairMathchingReset() {
+    MissionUtils.Console.print("\n초기화 되었습니다.\n");
+  },
 };
 
 module.exports = OutputView;
