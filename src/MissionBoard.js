@@ -44,11 +44,13 @@ class MissionBoard {
     return { mission: selectedMission, course: course, isPairExist: selectedMission.isPairExist(course) };
   }
 
+  getPairList(mission, course) {
+    return mission.getPairList(course);
+  }
+
   makePair(mission, course) {
     const shuffleCrew = this.#getShuffleCrew(course);
     mission.makePair(course, shuffleCrew);
-
-    return mission.getPairTextList(course);
   }
 }
 

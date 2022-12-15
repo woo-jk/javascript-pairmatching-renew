@@ -16,17 +16,17 @@ class App {
     InputView.readFeatureSelection((command) => {
       this.handleError(() => {
         Validator.validateFeatureCommand(command);
-        if (command === "1") this.showMissionOverview();
+        if (command === "1") this.showMissionOverview(false);
       }, this.requestFeatureCommand.bind(this));
     });
   }
 
-  showMissionOverview() {
+  showMissionOverview(onlyView) {
     OutputView.printMissionOverview();
-    this.requestMissionSelection();
+    this.requestMissionSelection(onlyView);
   }
 
-  requestMissionSelection() {
+  requestMissionSelection(onlyView) {
     InputView.readMissionSelection((input) => {
       this.handleError(() => {
         Validator.validateMissionInput(input);

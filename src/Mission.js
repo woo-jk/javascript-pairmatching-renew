@@ -46,7 +46,7 @@ class Mission {
     }
   }
 
-  getPairTextList(course) {
+  getPairList(course) {
     const pairList = course === "프론트엔드" ? this.#pair.frontEnd : this.#pair.backEnd;
 
     return pairList.map((pair) => pair.join(" : "));
