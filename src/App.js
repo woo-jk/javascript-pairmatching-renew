@@ -33,8 +33,8 @@ class App {
         const pairList = this.#missionBoard.makePair(input);
         OutputView.printPairMatchingList(pairList);
         this.requestFeatureCommand();
-      });
-    }, this.requestMissionSelection.bind(this));
+      }, this.requestMissionSelection.bind(this));
+    });
   }
 
   handleError(callback, request) {
