@@ -26,7 +26,7 @@ class App {
   executeFeature(command) {
     if (command === "1") this.showMissionOverview(false);
     if (command === "2") this.showMissionOverview(true);
-    if (command === "3") this.#missionBoard.resetPair();
+    if (command === "3") this.resetPair();
     if (command === "Q") this.end();
   }
 
@@ -76,6 +76,12 @@ class App {
       if (command === "네") this.pairMatching(mission, course, false);
       if (command === "아니오") this.requestMissionSelection(false);
     });
+  }
+
+  resetPair() {
+    this.#missionBoard.resetPair();
+    OutputView.printPairMathchingReset();
+    this.requestFeatureCommand();
   }
 
   end() {
